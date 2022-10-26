@@ -4,19 +4,19 @@ const { resolve } = require('path');
 const app = express()
 app.use(cors());
 
-// const server = require('http').createServer(app);
-const io = require('socket.io')(server, {
-    cors: {
-        origin: '*',
-    }
-});
-io.on('connection', (socket) => {
-    socket.removeAllListeners();
-    console.log('Websocket on connection', socket.id, socket.handshake.url);
+app.get('/test/index', async (req, res) => {
+    res.send('ini index')
 });
 
+app.get('/test', async (req, res) => {
+    res.send('ini test')
+});
 
 app.get('/', async (req, res) => {
+    res.send('ini index 2')
+});
+
+app.get('/test/socket', async (req, res) => {
     res.send('Hello Express!')
     let tmp = [
         {
@@ -55,5 +55,18 @@ app.get('/', async (req, res) => {
     io.emit("eventdata", { sheet: 'completed', current: 0 })
 
 })
-server.listen(3000);
-// app.listen(3000, () => console.log('Hello World Manual berjalan di http://localhost:3000'))
+// server.listen(3000);
+var server = app.listen(3000, () => console.log('Hello World Manual berjalan di http://localhost:3000'))
+
+const io = require('socket.io')(server, {
+    path: "/api/uploader",
+    cors: {
+        origin: '*',
+    },
+    transports: ['websocket'],
+});
+
+io.on('connection', (socket) => {
+    socket.removeAllListeners();
+    console.log('Websocket on connection', socket.id, socket.handshake.url);
+});

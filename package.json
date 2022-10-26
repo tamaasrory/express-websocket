@@ -1,14 +1,13 @@
 {
   "name": "express-websocket",
   "version": "1.0.0",
-  "description": "",
+  "description": "simulation to use express websocket with socket.io",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon test.js "
+    "start": "nodemon index.js "
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["express.js","websocket","socket.io"],
+  "author": "tamaasrory",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
